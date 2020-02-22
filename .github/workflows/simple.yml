@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 env:
-  resourceGroup: ${GITHUB_RUN_ID}${GITHUB_RUN_NUMBER}
+  resourceGroup: ${{GITHUB_RUN_ID}}${{GITHUB_RUN_NUMBER}}
 
 jobs:
   build:
@@ -13,8 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run a one-line script
+      run: echo $resourceGroup
+    - name: Run a one-line script
       run: echo "$resourceGroup"
     - name: Run a one-line script
       env:
         resourceGroup2: ${GITHUB_RUN_ID}${GITHUB_RUN_NUMBER}
-      run: echo "$resourceGroup"
+      run: echo $resourceGroup2
