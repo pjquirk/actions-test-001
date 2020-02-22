@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+env:
+  resourceGroup: ${GITHUB_RUN_ID}${GITHUB_RUN_NUMBER}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line script
+      run: echo "$resourceGroup"
