@@ -4,8 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on:
-      pool: ubuntu-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         multiply: [Debug, Release, Windows]
