@@ -2,21 +2,16 @@ name: CI
 
 on: [push]
 
-env:
-  resourceGroup: ${{github.run_id}}${{github.run_number}}
-
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on:
+      pool: default
+    strategy:
+      matrix:
+        multiply: [Debug, Release, Windows]
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo $resourceGroup
-    - name: Run a one-line script
-      run: echo "$resourceGroup"
-    - name: Run a one-line script
-      env:
-        resourceGroup2: ${GITHUB_RUN_ID}${GITHUB_RUN_NUMBER}
-      run: echo $resourceGroup2
+    - name: Countdown
+      run: |
+        $end = 3;
+        $end..1 | % { Start-Sleep -s 1; Write-Host ""Countdown: $_"" }
+      shell: pwsh
