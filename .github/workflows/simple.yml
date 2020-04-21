@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
     runs-on:
-      pool: default
+      pool: ubuntu-latest
     strategy:
       matrix:
         multiply: [Debug, Release, Windows]
