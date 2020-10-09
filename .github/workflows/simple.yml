@@ -1,16 +1,13 @@
 name: CI
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        multiply: [Debug, Release, Windows]
+    runs-on: ubuntu-latest
     steps:
     - name: Countdown
       run: |
-        $end = 3;
+        $end = 30;
         $end..1 | % { Start-Sleep -s 1; Write-Host ""Countdown: $_"" }
       shell: pwsh
