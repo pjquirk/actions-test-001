@@ -1,11 +1,19 @@
 name: CI
 
-on: [push, workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+      instanceType:
+        description: 'Runner instance type'
+        required: true
+        default: 'ubuntu-latest'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.instanceType }}
     steps:
+    - run: |
+        echo "Instance Type: ${{ github.event.inputs.instanceType }}"
     - name: Countdown
       run: |
         $end = 30;
