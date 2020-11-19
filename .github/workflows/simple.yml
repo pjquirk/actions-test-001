@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ github.event.inputs.instanceType }}
     env:      
       artifactsDir: artifacts/${{ env.GITHUB_REPOSITORY }}
-      pidstatFile: artifacts/${{ env.GITHUB_REPOSITORY }} -${{ matrix.label }}-pidstat.txt
+      pidstatFile: artifacts/${{ env.GITHUB_REPOSITORY }}-${{ matrix.label }}-pidstat.txt
       timingFile: artifacts/${{ env.GITHUB_REPOSITORY }}-${{ matrix.label }}-timing.txt
     steps:
       - run: mkdir ${{ env.artifactsDir }}
