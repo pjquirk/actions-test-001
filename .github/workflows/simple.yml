@@ -12,10 +12,12 @@ jobs:
   build:
     runs-on: ${{ github.event.inputs.instanceType }}
     steps:
-    - run: |
-        echo "Instance Type: ${{ github.event.inputs.instanceType }}"
-    - name: Countdown
-      run: |
-        $end = 30;
-        $end..1 | % { Start-Sleep -s 1; Write-Host ""Countdown: $_"" }
-      shell: pwsh
+      - run: iostat -cxd 1 100 > iostat.csv &
+      - run: |
+          echo "Instance Type: ${{ github.event.inputs.instanceType }}"
+      - name: Countdown
+        run: |
+          $end = 30;
+          $end..1 | % { Start-Sleep -s 1; Write-Host ""Countdown: $_"" }
+        shell: pwsh
+      - run: cat iostat.csv
