@@ -20,7 +20,7 @@ jobs:
       timingFile: artifacts/testing-${{ matrix.label }}-timing.txt
     steps:
       - run: mkdir ${{ env.artifactsDir }}
-      - run: pidstat -h -u -d 1 | grep -v -e "^$" | grep -v "UID" > ${{ env.pidstatFile }} &
+      - run: pidstat -h -u -d -r 1 | grep -v -e "^$" | grep -v "UID" > ${{ env.pidstatFile }} &
       - run: date +%s > ${{ env.timingFile }}
       
       # Actual work goes here
