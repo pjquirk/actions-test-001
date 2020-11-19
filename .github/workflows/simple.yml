@@ -25,3 +25,11 @@ jobs:
           date +%s >> timing.dat
           cat timing.dat
       - run: cat pidstat.csv
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          # Artifact name
+          name: pidstat
+          # A file, directory or wildcard pattern that describes what to upload
+          path: pidstat.csv
+          if-no-files-found: error
