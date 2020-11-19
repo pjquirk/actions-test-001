@@ -15,12 +15,15 @@ jobs:
         label: [label1, label2]
     runs-on: ${{ github.event.inputs.instanceType }}
     env:      
-      pidstatFile: artifacts/testing-${{ matrix.label }}-pidstat.csv
+      artifactsDir: artifacts
+      pidstatFile: artifacts/testing-${{ matrix.label }}-pidstat.txt
       timingFile: artifacts/testing-${{ matrix.label }}-timing.txt
     steps:
-      - run: mkdir artifacts
+      - run: mkdir ${{ artifactsDir }}
       - run: pidstat -h -u -d 1 100 | grep -v -e "^$" | grep -v "UID" > ${{ env.pidstatFile }} &
       - run: date +%s > ${{ env.timingFile }}
+      
+      # Actual work goes here
       - run: |
           echo "Instance Type: ${{ github.event.inputs.instanceType }}"
       - name: Countdown
@@ -28,15 +31,12 @@ jobs:
           $end = 30;
           $end..1 | % { Start-Sleep -s 1; Write-Host ""Countdown: $_"" }
         shell: pwsh
-      - run: |
-          date +%s >> ${{ env.timingFile }}
-          cat ${{ env.timingFile }}
-      - run: cat ${{ env.pidstatFile }}
+      # End of actual work
+      
+      - run: date +%s >> ${{ env.timingFile }}
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          # Artifact name
           name: pidstat
-          # A file, directory or wildcard pattern that describes what to upload
-          path: artifacts
+          path: ${{ artifactsDir }}
           if-no-files-found: error
