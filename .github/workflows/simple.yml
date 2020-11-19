@@ -15,9 +15,9 @@ jobs:
         label: [label1, label2]
     runs-on: ${{ github.event.inputs.instanceType }}
     env:      
-      artifactsDir: artifacts
-      pidstatFile: artifacts/testing-${{ matrix.label }}-pidstat.txt
-      timingFile: artifacts/testing-${{ matrix.label }}-timing.txt
+      artifactsDir: artifacts/${{ env.GITHUB_REPOSITORY }}
+      pidstatFile: artifacts/${{ env.GITHUB_REPOSITORY }} -${{ matrix.label }}-pidstat.txt
+      timingFile: artifacts/${{ env.GITHUB_REPOSITORY }}-${{ matrix.label }}-timing.txt
     steps:
       - run: mkdir ${{ env.artifactsDir }}
       - run: pidstat -h -u -d -r 1 | grep -v -e "^$" | grep -v "UID" > ${{ env.pidstatFile }} &
