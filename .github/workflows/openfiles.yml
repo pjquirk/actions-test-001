@@ -21,5 +21,7 @@ jobs:
       - shell: pwsh
         run: |
           Invoke-WebRequest https://download.sysinternals.com/files/Handle.zip -OutFile handle.zip
-        
+          Expand-Archive .\handle.zip
+          cd .\handle
+          ./handle -a -u powershell.exe -nobanner
         
