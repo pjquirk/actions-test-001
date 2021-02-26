@@ -1,0 +1,7 @@
+ProductTrace
+| where CustomerIdentifier =~ 'PJs-MacBook-Pro'
+| where UploadTimestamp == datetime(02/23/2021 19:23:21)
+| where Area == "Runner"
+| where Layer !contains "Http"
+| project Layer, Tracepoint, Message
+//| count
