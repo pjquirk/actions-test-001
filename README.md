@@ -9,3 +9,7 @@ test
 ```csl
 | where foo == "blah"
 ```
+
+```json
+{ "foo": "bar" }
+```
