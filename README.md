@@ -1,7 +1,5 @@
 # actions-test-001
 
-test
-
 ```kusto
 source
 | where Tenant == "<tenant_name>"
